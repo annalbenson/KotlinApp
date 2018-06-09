@@ -4,25 +4,27 @@ import android.content.DialogInterface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.support.v7.widget.RecyclerView
 import android.text.InputType
-import android.util.Log
 import android.view.Gravity
-import android.view.View
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_main.*
-
 
 
 class MainActivity : AppCompatActivity() {
 
-
     lateinit var messageView : TextView
     lateinit var button : Button
 
-    // can't really declare b/c it would be null until set later
+    var strings = ArrayList<String>()
+    lateinit var recyclerView : RecyclerView
+    lateinit var recyclerViewAdapter : RecyclerViewAdapter
+
+    val mainActivity : MainActivity = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,15 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show()
             buttonDialog()
         }
+
+
+        // recycler view
+
+        recyclerView = findViewById(R.id.recyclerID)
+        recyclerViewAdapter = RecyclerViewAdapter(strings,mainActivity)
+
+        recyclerView.adapter = recyclerViewAdapter
+
 
 
     }
@@ -81,6 +92,30 @@ class MainActivity : AppCompatActivity() {
 
         val dialog : AlertDialog = builder.create()
         dialog.show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        getMenuInflater().inflate(R.menu.action_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.menuChoiceA -> {
+                Toast.makeText(this, "A", Toast.LENGTH_SHORT).show()
+
+            }
+            R.id.menuChoiceB -> {
+                Toast.makeText(this, "B", Toast.LENGTH_SHORT).show()
+
+            }
+            else ->
+            {
+                Toast.makeText(this, "else", Toast.LENGTH_SHORT).show()
+                return super.onOptionsItemSelected(item)
+            }
+        }
+        return true
     }
 
 }
