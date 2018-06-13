@@ -1,15 +1,18 @@
 package com.annabenson.kotlinapp
 
-class RecyclerViewAdapter : RecyclerViewAdapter() {
+import android.support.v7.widget.RecyclerView
 
-}
-
-extends RecyclerView.Adapter<RecyclerViewHolder> {
-
-    lateinit var strings : ArrayList<String>
-
-    override fun
+class RecyclerViewAdapter : RecyclerView.Adapter(RecyclerViewHolder) {
 
 
 
 }
+
+//extends RecyclerView.Adapter<RecyclerViewHolder> {
+
+  //  lateinit var strings : ArrayList<String>
+
+    //override fun
+
+
+

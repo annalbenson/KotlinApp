@@ -118,4 +118,10 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+
+    // recycler view classes ???
+
+
+
+
 }
