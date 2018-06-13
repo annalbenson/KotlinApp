@@ -1,4 +1,15 @@
 package com.annabenson.kotlinapp
 
-class RecyclerViewAdapter {
+class RecyclerViewAdapter : RecyclerViewAdapter() {
+
+}
+
+extends RecyclerView.Adapter<RecyclerViewHolder> {
+
+    lateinit var strings : ArrayList<String>
+
+    override fun
+
+
+
 }
