@@ -5,20 +5,17 @@ import android.view.View
 import android.widget.TextView
 
 
-class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class RecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     var name: TextView
-    var symbol: TextView
-    var price: TextView
-    var change: TextView
+    var c: TextView
+    var d: TextView
 
     init {
-        // do
 
         name = view.findViewById(R.id.nameID)
-        symbol = view.findViewById(R.id.symbolID)
-        price = view.findViewById(R.id.priceID)
-        change = view.findViewById(R.id.changeID)
+        c = view.findViewById(R.id.cID)
+        d = view.findViewById(R.id.dID)
     }
 
 }

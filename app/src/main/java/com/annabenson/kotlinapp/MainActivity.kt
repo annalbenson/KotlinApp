@@ -4,18 +4,25 @@ import android.content.DialogInterface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.InputType
+import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
+// how to implement onClickListener
+
+    private val tag = "MainActivity"
 
     lateinit var messageView : TextView
     lateinit var button : Button
@@ -48,8 +55,7 @@ class MainActivity : AppCompatActivity() {
         recyclerViewAdapter = RecyclerViewAdapter(strings,mainActivity)
 
         recyclerView.adapter = recyclerViewAdapter
-
-
+        recyclerView.layoutManager = LinearLayoutManager(mainActivity)
 
     }
 
@@ -63,32 +69,21 @@ class MainActivity : AppCompatActivity() {
         builder.setView(editText)
 
         builder.setPositiveButton("OK", DialogInterface.OnClickListener{ dialog, whichButton ->
-            print("buttonDialog : positive clicked")
+            Log.d(tag,"buttonDialog : positive button clicked")
             val input : String = editText.text.toString()
-            messageView.text = input
+            Log.d(tag, "adding input" + input)
+            //messageView.text = input
+            addNewListItem(input)
 
         })
-
-        /*
-        builder.setPositiveButton("OK", DialogInterface.OnClickListener{
-            print("buttonDialog : positive clicked")
-            val input : String = editText.text.toString()
-            messageView.text = input
-        })
-        */
 
         builder.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, whichButton ->
-            print("buttonDialog : negative clicked")
+            Log.d(tag,"buttonDialog : negative button clicked")
         })
 
-            /*
-        builder.setNegativeButton("Cancel", DialogInterface.OnClickListener{
-            print("buttonDialog : negative clicked")
-        })
-        */
 
-        builder.setMessage("ABC")
-        builder.setTitle("DEF")
+        builder.setMessage("Enter String:")
+        builder.setTitle("ADD STRING")
 
         val dialog : AlertDialog = builder.create()
         dialog.show()
@@ -118,7 +113,28 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    fun addNewListItem( input : String){
+        strings.add(input)
+        strings.sort()
+        recyclerViewAdapter.notifyDataSetChanged()
+    }
 
+    /*
+    override fun onClick(view: View) {
+        val pos = recyclerView.getChildLayoutPosition(view)
+        val chore = chores.get(pos)
+
+        Toast.makeText(view.context, "Clicked on " + chore.getName(), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onLongClick(view: View): Boolean {
+        val pos = recyclerView.getChildLayoutPosition(view)
+        val chore = chores.get(pos)
+        Toast.makeText(view.context, "Long clicked on " + chore.getName(), Toast.LENGTH_SHORT).show()
+        return false
+    }
+
+*/
     // recycler view classes ???
 
 
